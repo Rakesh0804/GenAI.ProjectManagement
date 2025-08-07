@@ -1,0 +1,173 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-apphost",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "${workspaceFolder}/ProjectManagement.AppHost/ProjectManagement.AppHost.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-api",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Web/GenAI.ProjectManagement.WebAPI/GenAI.ProjectManagement.WebAPI.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "install-frontend-deps",
+            "type": "shell",
+            "command": "npm",
+            "args": ["install"],
+            "options": {
+                "cwd": "${workspaceFolder}/project-management-ui"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "open-aspire-dashboard",
+            "type": "shell",
+            "command": "cmd",
+            "args": ["/C", "start", "https://localhost:17057"],
+            "windows": {
+                "command": "cmd",
+                "args": ["/C", "start", "https://localhost:17057"]
+            },
+            "linux": {
+                "command": "xdg-open",
+                "args": ["https://localhost:17057"]
+            },
+            "osx": {
+                "command": "open",
+                "args": ["https://localhost:17057"]
+            },
+            "group": "test",
+            "presentation": {
+                "reveal": "never"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "run-aspire-apphost",
+            "type": "shell",
+            "command": "dotnet",
+            "args": ["run"],
+            "options": {
+                "cwd": "${workspaceFolder}/ProjectManagement.AppHost"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": "$msCompile",
+            "isBackground": true,
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "label": "stop-aspire",
+            "type": "shell",
+            "command": "taskkill",
+            "args": ["/F", "/IM", "dotnet.exe"],
+            "windows": {
+                "command": "taskkill",
+                "args": ["/F", "/IM", "dotnet.exe"]
+            },
+            "linux": {
+                "command": "pkill",
+                "args": ["-f", "ProjectManagement.AppHost"]
+            },
+            "osx": {
+                "command": "pkill",
+                "args": ["-f", "ProjectManagement.AppHost"]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "clean-build-all",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "clean-solution",
+                "restore-solution",
+                "build-solution"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "clean-solution",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "clean",
+                "${workspaceFolder}/GenAI.ProjectManagement.sln"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "restore-solution",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "restore",
+                "${workspaceFolder}/GenAI.ProjectManagement.sln"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-solution",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "${workspaceFolder}/GenAI.ProjectManagement.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

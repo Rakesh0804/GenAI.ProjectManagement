@@ -1,0 +1,274 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Welcome to <span class="brand-highlight">ProjectHub</span>
+      </h1>
+      <p class="hero-subtitle">
+        Your comprehensive project management solution for modern teams
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">{{ getImplementedModulesCount() }}</span>
+          <span class="stat-label">Active Modules</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">{{ getTotalModulesCount() }}</span>
+          <span class="stat-label">Total Features</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">{{ getCompletionPercentage() }}%</span>
+          <span class="stat-label">Implementation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Stats Cards -->
+  <section class="quick-stats-section">
+    <div class="section-header">
+      <h2>Quick Overview</h2>
+      <p>Key metrics at a glance</p>
+    </div>
+    
+    <div class="stats-grid">
+      <mat-card *ngFor="let stat of quickStats" class="stat-card" [style.border-left-color]="stat.color">
+        <div class="stat-card-content">
+          <div class="stat-icon" [style.background-color]="stat.color + '20'">
+            <mat-icon [style.color]="stat.color">{{ stat.icon }}</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-value">{{ stat.value }}</h3>
+            <p class="stat-title">{{ stat.title }}</p>
+            <span class="stat-change" [class.positive]="stat.changeType === 'positive'">
+              {{ stat.change }}
+            </span>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- Main Content Grid -->
+  <div class="main-content-grid">
+    
+    <!-- Modules Overview -->
+    <section class="modules-section">
+      <mat-card class="section-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>apps</mat-icon>
+            Available Modules
+          </mat-card-title>
+          <mat-card-subtitle>
+            Explore all the features available in ProjectHub
+          </mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <div class="modules-grid">
+            <div *ngFor="let module of modules" 
+                 class="module-card" 
+                 [class.implemented]="module.isImplemented"
+                 [class.not-implemented]="!module.isImplemented">
+              
+              <div class="module-header">
+                <div class="module-icon" [style.background-color]="module.color + '20'">
+                  <mat-icon [style.color]="module.color">{{ module.icon }}</mat-icon>
+                </div>
+                <div class="module-status">
+                  <mat-chip [style.background-color]="module.isImplemented ? '#4CAF50' : '#FFC107'"
+                           [style.color]="module.isImplemented ? 'white' : '#333'">
+                    {{ module.isImplemented ? 'Active' : 'Coming Soon' }}
+                  </mat-chip>
+                </div>
+              </div>
+              
+              <div class="module-content">
+                <h3 class="module-name">{{ module.name }}</h3>
+                <p class="module-description">{{ module.description }}</p>
+              </div>
+              
+              <div class="module-actions">
+                <button mat-button 
+                        [routerLink]="module.route" 
+                        [disabled]="!module.isImplemented"
+                        [style.color]="module.color">
+                  <mat-icon>{{ module.isImplemented ? 'launch' : 'schedule' }}</mat-icon>
+                  {{ module.isImplemented ? 'Open' : 'Soon' }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </section>
+
+    <!-- Project Statistics -->
+    <section class="stats-section">
+      <mat-card class="section-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>work</mat-icon>
+            Project Statistics
+          </mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <div class="project-stats">
+            <div class="stat-row">
+              <span class="stat-label">Total Projects</span>
+              <span class="stat-value">{{ projectStats.totalProjects }}</span>
+            </div>
+            <mat-divider></mat-divider>
+            
+            <div class="stat-row">
+              <span class="stat-label">Active Projects</span>
+              <span class="stat-value active">{{ projectStats.activeProjects }}</span>
+            </div>
+            <mat-divider></mat-divider>
+            
+            <div class="stat-row">
+              <span class="stat-label">Completed Projects</span>
+              <span class="stat-value completed">{{ projectStats.completedProjects }}</span>
+            </div>
+            <mat-divider></mat-divider>
+            
+            <div class="stat-row">
+              <span class="stat-label">On Hold Projects</span>
+              <span class="stat-value on-hold">{{ projectStats.onHoldProjects }}</span>
+            </div>
+          </div>
+
+          <div class="view-all-section">
+            <button mat-raised-button color="primary" routerLink="/projects">
+              <mat-icon>work</mat-icon>
+              View All Projects
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Task Statistics -->
+      <mat-card class="section-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>assignment</mat-icon>
+            Task Statistics
+          </mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <div class="task-stats">
+            <div class="stat-row">
+              <span class="stat-label">Total Tasks</span>
+              <span class="stat-value">{{ taskStats.totalTasks }}</span>
+            </div>
+            <mat-divider></mat-divider>
+            
+            <div class="stat-row">
+              <span class="stat-label">Completed Tasks</span>
+              <span class="stat-value completed">{{ taskStats.completedTasks }}</span>
+            </div>
+            <mat-divider></mat-divider>
+            
+            <div class="stat-row">
+              <span class="stat-label">Pending Tasks</span>
+              <span class="stat-value pending">{{ taskStats.pendingTasks }}</span>
+            </div>
+            <mat-divider></mat-divider>
+            
+            <div class="stat-row">
+              <span class="stat-label">Overdue Tasks</span>
+              <span class="stat-value overdue">{{ taskStats.overdueTasks }}</span>
+            </div>
+          </div>
+
+          <div class="view-all-section">
+            <button mat-raised-button color="accent" routerLink="/tasks">
+              <mat-icon>assignment</mat-icon>
+              View All Tasks
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </section>
+
+    <!-- Recent Activities -->
+    <section class="activities-section">
+      <mat-card class="section-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>history</mat-icon>
+            Recent Activities
+          </mat-card-title>
+          <mat-card-subtitle>
+            Latest updates and changes
+          </mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <div class="activities-list">
+            <div *ngFor="let activity of recentActivities" class="activity-item">
+              <div class="activity-icon" [style.background-color]="activity.color + '20'">
+                <mat-icon [style.color]="activity.color">{{ activity.icon }}</mat-icon>
+              </div>
+              <div class="activity-content">
+                <h4 class="activity-title">{{ activity.title }}</h4>
+                <p class="activity-description">{{ activity.description }}</p>
+                <span class="activity-time">{{ activity.time }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="view-all-section">
+            <button mat-button color="primary">
+              <mat-icon>visibility</mat-icon>
+              View All Activities
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions-section">
+      <mat-card class="section-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>bolt</mat-icon>
+            Quick Actions
+          </mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <div class="quick-actions-grid">
+            <button mat-raised-button color="primary" routerLink="/projects" class="action-button">
+              <mat-icon>add</mat-icon>
+              New Project
+            </button>
+            
+            <button mat-raised-button color="accent" routerLink="/tasks" class="action-button">
+              <mat-icon>assignment</mat-icon>
+              Add Task
+            </button>
+            
+            <button mat-raised-button routerLink="/users" class="action-button">
+              <mat-icon>person_add</mat-icon>
+              Invite User
+            </button>
+            
+            <button mat-raised-button routerLink="/reports" class="action-button">
+              <mat-icon>assessment</mat-icon>
+              Generate Report
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </section>
+
+  </div>
+</div>

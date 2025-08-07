@@ -1,0 +1,100 @@
+<div class="claim-form-dialog">
+  <h2 mat-dialog-title class="dialog-header">
+    <div class="header-content">
+      <mat-icon class="header-icon">{{ getDialogIcon() }}</mat-icon>
+      <span>{{ getDialogTitle() }}</span>
+    </div>
+  </h2>
+
+  <form [formGroup]="claimForm" (ngSubmit)="onSubmit()" class="claim-form">
+    <div mat-dialog-content class="dialog-content">
+      
+      <!-- Name and Type Fields Row -->
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field-half">
+          <mat-label>Claim Name</mat-label>
+          <input
+            matInput
+            formControlName="name"
+            placeholder="Enter claim name (e.g., admin.access, user.read)"
+            autocomplete="off">
+          <mat-icon matSuffix>label</mat-icon>
+          <mat-hint>Letters, numbers, dots, hyphens</mat-hint>
+          <mat-error *ngIf="isFieldInvalid('name')">
+            {{ getErrorMessage('name') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field-half">
+          <mat-label>Claim Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of claimTypes" [value]="type.value">
+              <div class="type-option">
+                <mat-icon>{{ type.icon }}</mat-icon>
+                <span>{{ type.label }}</span>
+              </div>
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>{{ getSelectedTypeIcon() }}</mat-icon>
+          <mat-error *ngIf="isFieldInvalid('type')">
+            {{ getErrorMessage('type') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Description Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          placeholder="Enter claim description (optional)"
+          rows="3"
+          maxlength="500">
+        </textarea>
+        <mat-icon matSuffix>description</mat-icon>
+        <mat-hint align="end">
+          {{ claimForm.get('description')?.value?.length || 0 }}/500
+        </mat-hint>
+        <mat-error *ngIf="isFieldInvalid('description')">
+          {{ getErrorMessage('description') }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Status Field -->
+      <div class="status-field">
+        <mat-checkbox formControlName="isActive" class="status-checkbox">
+          <span class="checkbox-label">
+            Active Status
+          </span>
+        </mat-checkbox>
+        <p class="status-description">
+          {{ claimForm.get('isActive')?.value ? 'This claim is active and available for use' : 'This claim is inactive and will not be available' }}
+        </p>
+      </div>
+
+    </div>
+
+    <div mat-dialog-actions class="dialog-actions">
+      <button
+        mat-button
+        type="button"
+        (click)="onCancel()"
+        [disabled]="isLoading">
+        <mat-icon>close</mat-icon>
+        Cancel
+      </button>
+      
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="claimForm.invalid || isLoading"
+        class="submit-button">
+        <mat-spinner *ngIf="isLoading" diameter="20" class="button-spinner"></mat-spinner>
+        <mat-icon *ngIf="!isLoading">{{ isCreate ? 'add' : 'save' }}</mat-icon>
+        {{ getSubmitButtonText() }}
+      </button>
+    </div>
+  </form>
+</div>

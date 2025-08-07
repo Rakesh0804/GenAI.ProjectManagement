@@ -1,0 +1,233 @@
+<div class="project-detail-container" *ngIf="!loading && project">
+  <div class="header">
+    <div class="title-section">
+      <button mat-icon-button (click)="goBack()" class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="title-info">
+        <h2>{{ project.name }}</h2>
+        <p class="client">{{ project.clientName }}</p>
+      </div>
+    </div>
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" (click)="editProject()">
+        <mat-icon>edit</mat-icon>
+        Edit Project
+      </button>
+      <button mat-stroked-button color="warn" (click)="deleteProject()">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <div class="project-overview">
+    <mat-card class="overview-card">
+      <mat-card-content>
+        <div class="overview-grid">
+          <div class="overview-item">
+            <div class="label">Status</div>
+            <mat-chip [class]="getStatusClass(project.status)">
+              {{ getStatusLabel(project.status) }}
+            </mat-chip>
+          </div>
+          <div class="overview-item">
+            <div class="label">Priority</div>
+            <mat-chip [class]="getPriorityClass(project.priority)">
+              {{ getPriorityLabel(project.priority) }}
+            </mat-chip>
+          </div>
+          <div class="overview-item">
+            <div class="label">Budget</div>
+            <div class="value">{{ project.budget | currency }}</div>
+          </div>
+          <div class="overview-item">
+            <div class="label">Progress</div>
+            <div class="progress-info">
+              <span>{{ getProgressPercentage() }}% Complete</span>
+              <mat-progress-bar 
+                mode="determinate" 
+                [value]="getProgressPercentage()"
+                [color]="getProgressPercentage() === 100 ? 'primary' : 'accent'">
+              </mat-progress-bar>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-tab-group class="project-tabs">
+    <mat-tab label="Details">
+      <div class="tab-content">
+        <div class="details-grid">
+          <mat-card class="detail-card">
+            <mat-card-header>
+              <mat-card-title>Project Information</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="detail-item">
+                <strong>Description:</strong>
+                <p>{{ project.description }}</p>
+              </div>
+              <div class="detail-item">
+                <strong>Start Date:</strong>
+                <p>{{ project.startDate | date:'MMM dd, yyyy' }}</p>
+              </div>
+              <div class="detail-item">
+                <strong>End Date:</strong>
+                <p>{{ project.endDate | date:'MMM dd, yyyy' }}</p>
+              </div>
+              <div class="detail-item">
+                <strong>Created:</strong>
+                <p>{{ project.createdAt | date:'MMM dd, yyyy - HH:mm' }}</p>
+              </div>
+              <div class="detail-item" *ngIf="project.updatedAt">
+                <strong>Last Updated:</strong>
+                <p>{{ project.updatedAt | date:'MMM dd, yyyy - HH:mm' }}</p>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="detail-card">
+            <mat-card-header>
+              <mat-card-title>Team Members</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="members-list" *ngIf="project.members && project.members.length > 0; else noMembers">
+                <div class="member-item" *ngFor="let member of project.members">
+                  <div class="member-avatar">
+                    {{ member.firstName[0] }}{{ member.lastName[0] }}
+                  </div>
+                  <div class="member-info">
+                    <div class="member-name">{{ member.firstName }} {{ member.lastName }}</div>
+                    <div class="member-email">{{ member.email }}</div>
+                  </div>
+                </div>
+              </div>
+              <ng-template #noMembers>
+                <p class="no-members">No team members assigned</p>
+              </ng-template>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Tasks">
+      <div class="tab-content">
+        <div class="tasks-header">
+          <h3>Project Tasks</h3>
+          <button mat-raised-button color="primary">
+            <mat-icon>add</mat-icon>
+            Add Task
+          </button>
+        </div>
+
+        <div class="task-status-boards" *ngIf="!tasksLoading">
+          <div class="status-column">
+            <h4>To Do ({{ getTasksByStatus(TaskStatus.ToDo).length }})</h4>
+            <div class="task-list">
+              <mat-card class="task-card" *ngFor="let task of getTasksByStatus(TaskStatus.ToDo)">
+                <mat-card-content>
+                  <div class="task-title">{{ task.title }}</div>
+                  <div class="task-meta">
+                    <mat-chip [class]="getTaskPriorityClass(task.priority)" class="task-priority">
+                      {{ getTaskPriorityLabel(task.priority) }}
+                    </mat-chip>
+                    <span class="task-assignee" *ngIf="task.assignedToUserName">
+                      {{ task.assignedToUserName }}
+                    </span>
+                  </div>
+                  <div class="task-due-date" *ngIf="task.dueDate">
+                    <mat-icon>schedule</mat-icon>
+                    {{ task.dueDate | date:'MMM dd' }}
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+
+          <div class="status-column">
+            <h4>In Progress ({{ getTasksByStatus(TaskStatus.InProgress).length }})</h4>
+            <div class="task-list">
+              <mat-card class="task-card" *ngFor="let task of getTasksByStatus(TaskStatus.InProgress)">
+                <mat-card-content>
+                  <div class="task-title">{{ task.title }}</div>
+                  <div class="task-meta">
+                    <mat-chip [class]="getTaskPriorityClass(task.priority)" class="task-priority">
+                      {{ getTaskPriorityLabel(task.priority) }}
+                    </mat-chip>
+                    <span class="task-assignee" *ngIf="task.assignedToUserName">
+                      {{ task.assignedToUserName }}
+                    </span>
+                  </div>
+                  <div class="task-due-date" *ngIf="task.dueDate">
+                    <mat-icon>schedule</mat-icon>
+                    {{ task.dueDate | date:'MMM dd' }}
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+
+          <div class="status-column">
+            <h4>In Review ({{ getTasksByStatus(TaskStatus.InReview).length }})</h4>
+            <div class="task-list">
+              <mat-card class="task-card" *ngFor="let task of getTasksByStatus(TaskStatus.InReview)">
+                <mat-card-content>
+                  <div class="task-title">{{ task.title }}</div>
+                  <div class="task-meta">
+                    <mat-chip [class]="getTaskPriorityClass(task.priority)" class="task-priority">
+                      {{ getTaskPriorityLabel(task.priority) }}
+                    </mat-chip>
+                    <span class="task-assignee" *ngIf="task.assignedToUserName">
+                      {{ task.assignedToUserName }}
+                    </span>
+                  </div>
+                  <div class="task-due-date" *ngIf="task.dueDate">
+                    <mat-icon>schedule</mat-icon>
+                    {{ task.dueDate | date:'MMM dd' }}
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+
+          <div class="status-column">
+            <h4>Done ({{ getTasksByStatus(TaskStatus.Done).length }})</h4>
+            <div class="task-list">
+              <mat-card class="task-card" *ngFor="let task of getTasksByStatus(TaskStatus.Done)">
+                <mat-card-content>
+                  <div class="task-title">{{ task.title }}</div>
+                  <div class="task-meta">
+                    <mat-chip [class]="getTaskPriorityClass(task.priority)" class="task-priority">
+                      {{ getTaskPriorityLabel(task.priority) }}
+                    </mat-chip>
+                    <span class="task-assignee" *ngIf="task.assignedToUserName">
+                      {{ task.assignedToUserName }}
+                    </span>
+                  </div>
+                  <div class="task-due-date" *ngIf="task.dueDate">
+                    <mat-icon>schedule</mat-icon>
+                    {{ task.dueDate | date:'MMM dd' }}
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="loading-container" *ngIf="tasksLoading">
+          <mat-icon class="loading-spinner">refresh</mat-icon>
+          <p>Loading tasks...</p>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<div class="loading-container" *ngIf="loading">
+  <mat-icon class="loading-spinner">refresh</mat-icon>
+  <p>Loading project...</p>
+</div>

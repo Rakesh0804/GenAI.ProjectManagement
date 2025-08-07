@@ -1,0 +1,287 @@
+// Claim Form Dialog Styles
+.claim-form-dialog {
+  width: 100%;
+  max-width: 600px;
+  
+  .dialog-header {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    margin: 0;
+    background-color: var(--primary-50);
+    border-bottom: 1px solid var(--border-light);
+    min-height: auto;
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      color: var(--primary-color);
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.2;
+      
+      .header-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+  
+  .dialog-content {
+    padding: var(--spacing-md) var(--spacing-lg);
+    max-height: none;
+    overflow: visible;
+  }
+  
+  .dialog-actions {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    
+    button {
+      min-width: 100px;
+      font-weight: var(--font-weight-medium);
+      
+      mat-icon {
+        margin-right: var(--spacing-xs);
+      }
+    }
+    
+    .submit-button {
+      position: relative;
+      
+      .button-spinner {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
+
+// Form Styles
+.claim-form {
+  .full-width {
+    width: 100%;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  // Form Row for Two Fields
+  .form-row {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    
+    .form-field-half {
+      flex: 1;
+      min-width: 0; // Prevents flex items from overflowing
+    }
+  }
+  
+  // Form Field Customization
+  ::ng-deep .mat-mdc-form-field {
+    &.mat-form-field-appearance-outline {
+      .mat-mdc-form-field-outline {
+        border-radius: var(--radius-md);
+      }
+      
+      &.mat-focused .mat-mdc-form-field-outline-thick {
+        border-color: var(--primary-color);
+      }
+    }
+    
+    .mat-mdc-form-field-hint,
+    .mat-mdc-form-field-error {
+      font-size: var(--font-size-xs);
+      line-height: 1.2;
+    }
+    
+    .mat-mdc-form-field-error {
+      color: var(--error-color);
+    }
+    
+    .mat-mdc-form-field-hint {
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    // Fix for half-width fields with hints
+    &.form-field-half {
+      .mat-mdc-form-field-hint {
+        white-space: normal;
+        word-wrap: break-word;
+        max-width: 100%;
+      }
+    }
+  }
+  
+  // Input Field Styles
+  ::ng-deep .mat-mdc-input-element {
+    font-size: var(--font-size-base);
+    
+    &::placeholder {
+      color: var(--text-muted);
+    }
+  }
+  
+  // Select Field Styles
+  ::ng-deep .mat-mdc-select {
+    font-size: var(--font-size-base);
+  }
+  
+  // Type Option Styles
+  .type-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    
+    mat-icon {
+      color: var(--primary-color);
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+  
+  // Status Field Styles
+  .status-field {
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-secondary);
+    
+    .status-checkbox {
+      margin-bottom: var(--spacing-xs);
+      
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        font-weight: var(--font-weight-medium);
+        color: var(--text-primary);
+      }
+    }
+    
+    .status-description {
+      margin: 0;
+      font-size: var(--font-size-sm);
+      color: var(--text-muted);
+      padding-left: var(--spacing-lg);
+    }
+    
+    // Dynamic colors based on checkbox state
+    &:has(.mat-mdc-checkbox-checked) {
+      border-color: var(--success-color);
+      background-color: rgba(76, 175, 80, 0.05);
+    }
+    
+    &:has(.mat-mdc-checkbox:not(.mat-mdc-checkbox-checked)) {
+      border-color: var(--warning-color);
+      background-color: rgba(255, 152, 0, 0.05);
+    }
+  }
+}
+
+// Textarea Specific Styles
+::ng-deep .mat-mdc-form-field textarea.mat-mdc-input-element {
+  resize: vertical;
+  min-height: 60px;
+}
+
+// Button Loading State
+.submit-button {
+  &[disabled] {
+    opacity: 0.7;
+    
+    .button-spinner {
+      ::ng-deep circle {
+        stroke: white;
+      }
+    }
+  }
+}
+
+// Error State Customization
+::ng-deep .mat-mdc-form-field.mat-form-field-invalid {
+  .mat-mdc-form-field-outline-thick {
+    border-color: var(--error-color) !important;
+  }
+}
+
+// Focus State Enhancement
+::ng-deep .mat-mdc-form-field.mat-focused {
+  .mat-mdc-form-field-label {
+    color: var(--primary-color) !important;
+  }
+}
+
+// Responsive Design
+@media (max-width: 600px) {
+  .claim-form-dialog {
+    .dialog-header,
+    .dialog-content,
+    .dialog-actions {
+      padding: var(--spacing-md);
+    }
+    
+    .dialog-actions {
+      flex-direction: column;
+      
+      button {
+        width: 100%;
+        order: 1;
+        
+        &.submit-button {
+          order: 0;
+          margin-bottom: var(--spacing-sm);
+        }
+      }
+    }
+  }
+  
+  .claim-form {
+    .form-row {
+      flex-direction: column;
+      gap: 0;
+      
+      .form-field-half {
+        margin-bottom: var(--spacing-md);
+      }
+    }
+    
+    .full-width {
+      margin-bottom: var(--spacing-md);
+    }
+  }
+}
+
+// High Contrast Mode Support
+@media (prefers-contrast: high) {
+  .claim-form-dialog {
+    .dialog-header {
+      border-bottom-width: 2px;
+    }
+    
+    .dialog-actions {
+      border-top-width: 2px;
+    }
+  }
+  
+  .claim-form .status-field {
+    border-width: 2px;
+  }
+}
+
+// Reduced Motion Support
+@media (prefers-reduced-motion: reduce) {
+  .claim-form-dialog * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

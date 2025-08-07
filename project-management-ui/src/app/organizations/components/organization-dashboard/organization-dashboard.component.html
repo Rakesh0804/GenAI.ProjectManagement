@@ -1,0 +1,138 @@
+<div class="organization-dashboard" *ngIf="!isLoading">
+  <!-- Page Header -->
+  <mat-card class="header-card">
+    <mat-card-header>
+      <div class="header-content">
+        <div class="header-left">
+          <mat-card-title>
+            <mat-icon class="header-icon">business</mat-icon>
+            Organizations
+          </mat-card-title>
+          <mat-card-subtitle>Manage your company organizations and branches</mat-card-subtitle>
+        </div>
+        <div class="header-actions">
+          <button mat-raised-button color="primary" (click)="createOrganization()" class="create-button">
+            <mat-icon>add</mat-icon>
+            New Organization
+          </button>
+        </div>
+      </div>
+    </mat-card-header>
+  </mat-card>
+
+  <!-- Organizations Grid -->
+  <div class="organizations-container">
+    <div class="organizations-grid" *ngIf="organizations.length > 0">
+      <mat-card *ngFor="let org of organizations" class="organization-card" 
+                (click)="viewOrganizationDetails(org)">
+        <mat-card-header>
+          <div mat-card-avatar class="org-avatar">
+            <img *ngIf="org.logoUrl" [src]="org.logoUrl" [alt]="org.name">
+            <mat-icon *ngIf="!org.logoUrl">business</mat-icon>
+          </div>
+          <mat-card-title>{{ org.name }}</mat-card-title>
+          <mat-card-subtitle>{{ org.industry || 'Organization' }}</mat-card-subtitle>
+          <div class="card-menu">
+            <button mat-icon-button [matMenuTriggerFor]="orgMenu" (click)="$event.stopPropagation()">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #orgMenu="matMenu">
+              <button mat-menu-item (click)="editOrganization(org)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit Organization</span>
+              </button>
+              <button mat-menu-item (click)="viewOrganizationDetails(org); $event.stopPropagation()">
+                <mat-icon>visibility</mat-icon>
+                <span>View Details</span>
+              </button>
+            </mat-menu>
+          </div>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <div class="org-stats">
+            <div class="stat-item">
+              <mat-icon>business</mat-icon>
+              <span class="stat-number">{{ org.branches.length || 0 }}</span>
+              <span class="stat-label">Branches</span>
+            </div>
+            <div class="stat-item" *ngIf="org.establishedDate">
+              <mat-icon>event</mat-icon>
+              <span class="stat-number">{{ getEstablishedYear(org) }}</span>
+              <span class="stat-label">Established</span>
+            </div>
+          </div>
+
+          <div class="org-info" *ngIf="org.city || org.country">
+            <mat-icon>location_on</mat-icon>
+            <span>{{ org.city }}{{ org.city && org.country ? ', ' : '' }}{{ org.country }}</span>
+          </div>
+
+          <!-- Branches Preview -->
+          <div class="branches-preview" *ngIf="org.branches && org.branches.length > 0">
+            <div class="branches-header">
+              <span class="branches-title">Branches</span>
+              <button mat-button color="primary" (click)="createBranch(org); $event.stopPropagation()">
+                <mat-icon>add</mat-icon>
+                Add Branch
+              </button>
+            </div>
+            <div class="branches-list">
+              <div *ngFor="let branch of org.branches.slice(0, 3)" class="branch-item">
+                <div class="branch-info">
+                  <span class="branch-name">{{ branch.name }}</span>
+                  <span class="branch-location" *ngIf="branch.city">{{ branch.city }}</span>
+                </div>
+                <div class="branch-actions">
+                  <button mat-icon-button (click)="editBranch(org, branch); $event.stopPropagation()" 
+                          matTooltip="Edit Branch">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="warn" (click)="deleteBranch(branch.id); $event.stopPropagation()" 
+                          matTooltip="Delete Branch">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div *ngIf="org.branches.length > 3" class="more-branches">
+                <button mat-button (click)="viewAllBranches(org); $event.stopPropagation()">
+                  +{{ org.branches.length - 3 }} more branches
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- No Branches State -->
+          <div class="no-branches" *ngIf="!org.branches || org.branches.length === 0">
+            <div class="no-branches-content">
+              <mat-icon>business_center</mat-icon>
+              <span>No branches yet</span>
+              <button mat-stroked-button color="primary" (click)="createBranch(org); $event.stopPropagation()">
+                <mat-icon>add</mat-icon>
+                Add First Branch
+              </button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="organizations.length === 0 && !isLoading">
+      <div class="empty-content">
+        <mat-icon>business</mat-icon>
+        <p>Get started by creating your first organization to manage branches and teams.</p>
+        <button mat-raised-button color="primary" (click)="createOrganization()">
+          <mat-icon>add</mat-icon>
+          Create Organization
+        </button>
+      </div>
+    </div>
+  </div>
+
+<div class="loading-container" *ngIf="isLoading">
+  <div class="loading-content">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading organizations...</p>
+  </div>
+</div>

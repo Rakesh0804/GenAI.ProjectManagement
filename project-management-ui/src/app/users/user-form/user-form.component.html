@@ -1,0 +1,121 @@
+<div class="user-form-dialog">
+  <h2 mat-dialog-title>
+    <mat-icon>{{ isCreate ? 'person_add' : 'edit' }}</mat-icon>
+    {{ isCreate ? 'Add New User' : 'Edit User' }}
+  </h2>
+
+  <div mat-dialog-content class="dialog-content">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <!-- Personal Information Section -->
+        <div class="form-section">
+          <h3 class="section-title">Personal Information</h3>
+          
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" placeholder="Enter first name">
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-error>{{ getFieldError('firstName') }}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" placeholder="Enter last name">
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-error>{{ getFieldError('lastName') }}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" formControlName="email" placeholder="Enter email address">
+              <mat-icon matSuffix>email</mat-icon>
+              <mat-error>{{ getFieldError('email') }}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phoneNumber" placeholder="Enter phone number (optional)">
+              <mat-icon matSuffix>phone</mat-icon>
+              <mat-error>{{ getFieldError('phoneNumber') }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Account Information Section -->
+        <div class="form-section">
+          <h3 class="section-title">Account Information</h3>
+          
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="userName" placeholder="Enter username" [readonly]="!isCreate">
+              <mat-icon matSuffix>account_circle</mat-icon>
+              <mat-error>{{ getFieldError('userName') }}</mat-error>
+              <mat-hint *ngIf="!isCreate">Username cannot be changed</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row" *ngIf="isCreate">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Enter password">
+              <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+                <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+              </button>
+              <mat-error>{{ getFieldError('password') }}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row" *ngIf="isCreate">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirm password">
+              <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" type="button">
+                <mat-icon>{{ hideConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+              </button>
+              <mat-error>{{ getFieldError('confirmPassword') }}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Manager</mat-label>
+              <mat-select formControlName="managerId" placeholder="Select manager (optional)">
+                <mat-option value="">None</mat-option>
+                <mat-option *ngFor="let manager of availableManagers" [value]="manager.id">
+                  {{ manager.firstName }} {{ manager.lastName }} ({{ manager.userName }})
+                </mat-option>
+              </mat-select>
+              <mat-icon matSuffix>supervisor_account</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-checkbox formControlName="isActive" color="primary">
+              <span class="checkbox-label">Active User</span>
+              <span class="checkbox-hint">Inactive users cannot log in to the system</span>
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="onCancel()" [disabled]="isLoading">
+      Cancel
+    </button>
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="isLoading || !userForm.valid">
+      <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+      <mat-icon *ngIf="!isLoading">{{ isCreate ? 'add' : 'save' }}</mat-icon>
+      {{ isCreate ? 'Create User' : 'Update User' }}
+    </button>
+  </div>
+</div>

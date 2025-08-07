@@ -1,0 +1,256 @@
+<div class="dashboard-container">
+  
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon class="stat-icon total-projects-icon" fontSet="material-icons-outlined">folder</mat-icon>
+          <div class="stat-info">
+            <h2>{{ stats.totalProjects }}</h2>
+            <p>Total Projects</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon class="stat-icon active-projects-icon" fontSet="material-icons-outlined">trending_up</mat-icon>
+          <div class="stat-info">
+            <h2>{{ stats.activeProjects }}</h2>
+            <p>Active Projects</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon class="stat-icon my-tasks-icon" fontSet="material-icons-outlined">assignment</mat-icon>
+          <div class="stat-info">
+            <h2>{{ stats.myTasks }}</h2>
+            <p>My Tasks</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon class="stat-icon completed-tasks-icon" fontSet="material-icons-outlined">check_circle</mat-icon>
+          <div class="stat-info">
+            <h2>{{ stats.completedTasks }}</h2>
+            <p>Completed Tasks</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Dashboard Widgets -->
+  <div class="dashboard-widgets">
+    <!-- Left Column -->
+    <div class="left-column">
+      <!-- Quick Links Widget -->
+      <mat-card class="widget-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon class="header-icon">flash_on</mat-icon>
+            Quick Actions
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="quick-actions">
+            <button mat-raised-button color="primary" (click)="createProject()" class="action-button">
+              <mat-icon>add</mat-icon>
+              New Project
+            </button>
+            <button mat-raised-button color="accent" (click)="createTask()" class="action-button">
+              <mat-icon>assignment_add</mat-icon>
+              New Task
+            </button>
+            <button mat-stroked-button routerLink="/projects" class="action-button">
+              <mat-icon>folder</mat-icon>
+              View Projects
+            </button>
+            <button mat-stroked-button routerLink="/tasks" class="action-button">
+              <mat-icon>assignment</mat-icon>
+              View Tasks
+            </button>
+          </div>
+          <!-- <div *ngIf="quickLinks.length > 0" class="separator"></div>
+          <div *ngFor="let link of quickLinks" class="quick-link-item" [routerLink]="link.route">
+            <mat-icon class="link-icon">{{ link.icon }}</mat-icon>
+            <div class="link-text">
+              <div class="link-title">{{ link.title }}</div>
+            </div>
+          </div> -->
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Upcoming Holidays Widget -->
+      <mat-card class="widget-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon class="header-icon">event</mat-icon>
+            Upcoming Holidays
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngIf="upcomingHolidays.length === 0" class="no-data">
+            No upcoming holidays
+          </div>
+          <div *ngFor="let holiday of upcomingHolidays" class="holiday-item">
+            <div class="holiday-date">
+              <div class="date-number">{{ formatDate(holiday.date, 'd') }}</div>
+              <div class="date-details">
+                <div class="month">{{ formatDate(holiday.date, 'MMM') }}</div>
+                <div class="weekday">{{ formatDate(holiday.date, 'EEEE') }}</div>
+              </div>
+            </div>
+            <div class="holiday-info">
+              <div class="holiday-name">{{ holiday.name }}</div>
+              <span class="holiday-type-badge">{{ holiday.type }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Middle Column -->
+    <div class="middle-column">
+      <!-- Announcements Widget -->
+      <mat-card class="widget-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon class="header-icon">campaign</mat-icon>
+            Announcements
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngIf="announcements.length === 0" class="no-data">
+            No Announcement
+          </div>
+          <div *ngFor="let announcement of announcements" class="announcement-item">
+            <h4>{{ announcement.title }}</h4>
+            <p>{{ announcement.content }}</p>
+            <span class="announcement-date">{{ formatDate(announcement.date, 'MMM d, yyyy') }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- My Pending Tasks Widget -->
+      <mat-card class="widget-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon class="header-icon">assignment</mat-icon>
+            My Pending Tasks
+            <span class="count-badge">{{ myPendingTasks.length }}</span>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngIf="myPendingTasks.length === 0" class="no-data">
+            There are no tasks available
+          </div>
+          <div *ngFor="let task of myPendingTasks" class="task-item">
+            <div class="task-info">
+              <h4>{{ task.title }}</h4>
+              <p>{{ task.projectName }}</p>
+              <div class="task-badges">
+                <span class="status-badge" [ngClass]="getTaskStatusBadgeClass(task.status)">
+                  {{ getTaskStatusText(task.status) }}
+                </span>
+                <span class="priority-badge" [ngClass]="getTaskPriorityBadgeClass(task.priority)">
+                  {{ getTaskPriorityText(task.priority) }}
+                </span>
+              </div>
+            </div>
+            <button mat-icon-button>
+              <mat-icon fontSet="material-icons-outlined">arrow_forward</mat-icon>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Right Column -->
+    <div class="right-column">
+      <!-- Leave Report Widget -->
+      <mat-card class="widget-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon class="header-icon">today</mat-icon>
+            Leave Report
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="leave-summary">
+            <div class="leave-item">
+              <div class="leave-circle compensatory">0</div>
+              <div class="leave-details">
+                <h4>Compensatory Off</h4>
+                <p>Available 0 Day(s)</p>
+              </div>
+            </div>
+            
+            <div class="leave-item">
+              <div class="leave-circle earned">1.9</div>
+              <div class="leave-details">
+                <h4>Earned Leave</h4>
+                <p>Available 1.9 Day(s)</p>
+              </div>
+            </div>
+            
+            <div class="leave-item">
+              <div class="leave-circle without-pay">18</div>
+              <div class="leave-details">
+                <h4>Leave Without Pay</h4>
+                <p>Used this year</p>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Recent Projects Widget -->
+      <mat-card class="widget-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon class="header-icon">folder</mat-icon>
+            Recent Projects
+          </mat-card-title>
+          <button mat-button routerLink="/projects" class="view-all-btn">
+            View All
+            <mat-icon fontSet="material-icons-outlined">arrow_forward</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngIf="projects.length === 0" class="no-data">
+            No projects available
+          </div>
+          <div *ngFor="let project of projects" class="project-item">
+            <div class="project-info">
+              <div class="project-name">{{ project.name }}</div>
+              <div class="project-client">{{ project.clientName }}</div>
+              <div class="project-badges">
+                <span class="status-badge" [ngClass]="getStatusBadgeClass(project.status)">
+                  {{ getStatusText(project.status) }}
+                </span>
+                <span class="priority-badge" [ngClass]="getPriorityBadgeClass(project.priority)">
+                  {{ getPriorityText(project.priority) }}
+                </span>
+              </div>
+            </div>
+            <button mat-icon-button routerLink="/projects/{{ project.id }}" class="project-arrow">
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

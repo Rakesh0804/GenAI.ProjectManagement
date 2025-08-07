@@ -1,0 +1,43 @@
+{
+    "dotnet.defaultSolution": "GenAI.ProjectManagement.sln",
+    "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
+    "dotnet.codeLens.enableReferencesCodeLens": true,
+    "omnisharp.enableMsBuildLoadProjectsOnDemand": false,
+    "omnisharp.enableRoslynAnalyzers": true,
+    
+    // TypeScript/Angular settings
+    "typescript.preferences.includePackageJsonAutoImports": "auto",
+    "typescript.suggest.autoImports": true,
+    "angular.experimental-ivy": true,
+    
+    // File associations
+    "files.associations": {
+        "*.json": "jsonc"
+    },
+    
+    // Search settings
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bin": true,
+        "**/obj": true,
+        "**/.angular": true,
+        "**/dist": true
+    },
+    
+    // File watcher excludes
+    "files.watcherExclude": {
+        "**/node_modules/**": true,
+        "**/bin/**": true,
+        "**/obj/**": true,
+        "**/.angular/**": true,
+        "**/dist/**": true
+    },
+    
+    // Terminal settings
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    
+    // Aspire specific settings
+    "dotnet.server.useOmnisharp": false,
+    "aspire.dashboard.autoOpen": true,
+    "aspire.dashboard.url": "https://localhost:17057"
+}

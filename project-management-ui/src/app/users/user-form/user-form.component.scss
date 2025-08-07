@@ -1,0 +1,143 @@
+.user-form-dialog {
+  h2[mat-dialog-title] {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #2c3e50;
+    font-weight: 500;
+    margin: 0 0 16px 0;
+    
+    mat-icon {
+      color: #3498db;
+    }
+  }
+
+  .dialog-content {
+    padding: 0;
+    margin: 0;
+    min-height: 400px;
+    max-height: 70vh;
+    overflow-y: auto;
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      padding: 16px;
+
+      .form-section {
+        .section-title {
+          color: #2c3e50;
+          font-size: 1.1rem;
+          font-weight: 500;
+          margin: 0 0 20px 0;
+          padding-bottom: 8px;
+          border-bottom: 2px solid #3498db;
+        }
+
+        .form-row {
+          margin-bottom: 20px;
+
+          .full-width {
+            width: 100%;
+          }
+
+          mat-form-field {
+            mat-icon[matSuffix] {
+              color: #7f8c8d;
+            }
+
+            &.mat-focused mat-icon[matSuffix] {
+              color: #3498db;
+            }
+          }
+
+          mat-checkbox {
+            .checkbox-label {
+              font-weight: 500;
+              color: #2c3e50;
+            }
+
+            .checkbox-hint {
+              display: block;
+              font-size: 0.85rem;
+              color: #7f8c8d;
+              margin-top: 4px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 24px;
+    margin: 0;
+    border-top: 1px solid #ecf0f1;
+    background-color: #f8f9fa;
+
+    button {
+      min-width: 120px;
+
+      &[mat-raised-button] {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        mat-spinner {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .user-form-dialog {
+    .dialog-content {
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 12px;
+
+        .form-section {
+          .section-title {
+            font-size: 1rem;
+            margin-bottom: 16px;
+          }
+
+          .form-row {
+            margin-bottom: 16px;
+          }
+        }
+      }
+    }
+
+    .dialog-actions {
+      padding: 12px 16px;
+
+      button {
+        min-width: 100px;
+      }
+    }
+  }
+}
+
+// Form validation styles
+.mat-mdc-form-field {
+  &.ng-invalid.ng-touched {
+    .mat-mdc-text-field-wrapper {
+      border-color: #e74c3c;
+    }
+  }
+}
+
+// Disabled state styling
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

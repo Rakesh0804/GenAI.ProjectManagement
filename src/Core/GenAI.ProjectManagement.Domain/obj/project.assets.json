@@ -1,0 +1,119 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    "net9.0": []
+  },
+  "packageFolders": {
+    "C:\\Users\\Rakesh Pandey\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Rakesh Pandey\\source\\repos\\GenAI.ProjectManagement\\src\\Core\\GenAI.ProjectManagement.Domain\\GenAI.ProjectManagement.Domain.csproj",
+      "projectName": "GenAI.ProjectManagement.Domain",
+      "projectPath": "C:\\Users\\Rakesh Pandey\\source\\repos\\GenAI.ProjectManagement\\src\\Core\\GenAI.ProjectManagement.Domain\\GenAI.ProjectManagement.Domain.csproj",
+      "packagesPath": "C:\\Users\\Rakesh Pandey\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Rakesh Pandey\\source\\repos\\GenAI.ProjectManagement\\src\\Core\\GenAI.ProjectManagement.Domain\\obj\\",
+      "projectStyle": "PackageReference",
+      "centralPackageVersionsManagementEnabled": true,
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Rakesh Pandey\\source\\repos\\GenAI.ProjectManagement\\NuGet.Config",
+        "C:\\Users\\Rakesh Pandey\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0"
+      ],
+      "sources": {
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
+    },
+    "frameworks": {
+      "net9.0": {
+        "targetAlias": "net9.0",
+        "centralPackageVersions": {
+          "Aspire.Hosting": "9.4.0",
+          "Aspire.Hosting.AppHost": "9.4.0",
+          "Aspire.Hosting.NodeJs": "9.4.0",
+          "Aspire.Hosting.PostgreSQL": "9.4.0",
+          "Aspire.Npgsql.EntityFrameworkCore.PostgreSQL": "9.4.0",
+          "AutoMapper": "12.0.1",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "BCrypt.Net-Next": "4.0.3",
+          "Bogus": "35.6.1",
+          "FluentAssertions": "7.0.0",
+          "FluentValidation": "11.10.0",
+          "FluentValidation.AspNetCore": "11.3.0",
+          "FluentValidation.DependencyInjectionExtensions": "11.10.0",
+          "MediatR": "11.1.0",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.0",
+          "Microsoft.AspNetCore.Authorization": "9.0.0",
+          "Microsoft.AspNetCore.Cors": "2.2.0",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "9.0.0",
+          "Microsoft.EntityFrameworkCore": "9.0.7",
+          "Microsoft.EntityFrameworkCore.Design": "9.0.7",
+          "Microsoft.EntityFrameworkCore.Tools": "9.0.7",
+          "Microsoft.Extensions.Configuration": "9.0.0",
+          "Microsoft.Extensions.Configuration.Json": "9.0.0",
+          "Microsoft.Extensions.DependencyInjection": "9.0.0",
+          "Microsoft.Extensions.Hosting": "9.0.0",
+          "Microsoft.Extensions.Logging": "9.0.0",
+          "Microsoft.IdentityModel.Tokens": "8.2.1",
+          "Microsoft.NET.Test.Sdk": "17.12.0",
+          "Moq": "4.20.72",
+          "Newtonsoft.Json": "13.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+          "Swashbuckle.AspNetCore": "7.2.0",
+          "System.IdentityModel.Tokens.Jwt": "8.2.1",
+          "xunit": "2.9.2",
+          "xunit.runner.visualstudio": "2.8.2"
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

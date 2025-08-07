@@ -1,0 +1,410 @@
+// Claims List Component Styles
+.claim-list-container {
+  padding: var(--spacing-lg);
+  background-color: var(--bg-secondary);
+  min-height: 100vh;
+}
+
+// Header Card
+.header-card {
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-medium);
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    
+    .header-left {
+      .mat-mdc-card-title {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        color: var(--text-primary);
+        font-size: var(--font-size-xxl);
+        font-weight: var(--font-weight-semibold);
+        margin-bottom: var(--spacing-xs);
+        
+        .header-icon {
+          color: var(--primary-color);
+          font-size: 28px;
+          width: 28px;
+          height: 28px;
+        }
+      }
+      
+      .mat-mdc-card-subtitle {
+        color: var(--text-muted);
+        font-size: var(--font-size-base);
+        margin: 0;
+      }
+    }
+    
+    .header-actions {
+      .create-button {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: var(--font-weight-medium);
+        box-shadow: var(--shadow-small);
+        transition: var(--transition-normal);
+        border-radius: var(--radius-md);
+        
+        &:hover {
+          background-color: var(--primary-600);
+          box-shadow: var(--shadow-medium);
+        }
+        
+        mat-icon {
+          margin-right: var(--spacing-xs);
+        }
+      }
+    }
+  }
+}
+
+// Content Card
+.content-card {
+  box-shadow: var(--shadow-medium);
+  border-radius: var(--radius-lg);
+  
+  .mat-mdc-card-content {
+    padding: var(--spacing-lg);
+  }
+}
+
+// Search Section
+.search-section {
+  margin-bottom: var(--spacing-lg);
+  
+  .search-field {
+    width: 100%;
+    max-width: 400px;
+    
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+    
+    .mat-mdc-text-field-wrapper {
+      border-radius: var(--radius-md);
+    }
+    
+    mat-icon {
+      color: var(--text-muted);
+    }
+  }
+}
+
+// Loading Container
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xxxl);
+  
+  mat-spinner {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  p {
+    color: var(--text-muted);
+    font-size: var(--font-size-base);
+  }
+}
+
+// Table Container
+.table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-small);
+}
+
+// Claims Table
+.claims-table {
+  width: 100%;
+  background-color: var(--bg-primary);
+  
+  // Header Styles
+  .mat-mdc-header-row {
+    background-color: var(--bg-secondary);
+    
+    .header-cell {
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-primary);
+      padding: var(--spacing-md);
+      border-bottom: 2px solid var(--primary-color);
+      
+      .header-content {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        
+        mat-icon {
+          color: var(--primary-color);
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+      }
+      
+      &.actions-header {
+        text-align: center;
+      }
+    }
+  }
+  
+  // Row Styles
+  .table-row {
+    transition: var(--transition-normal);
+    
+    &:hover {
+      background-color: var(--primary-50);
+    }
+    
+    &:nth-child(even) {
+      background-color: var(--bg-secondary);
+      
+      &:hover {
+        background-color: var(--primary-100);
+      }
+    }
+  }
+  
+  // Cell Styles
+  .mat-mdc-cell {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-light);
+  }
+  
+  .name-cell {
+    .claim-name {
+      strong {
+        color: var(--text-primary);
+        font-weight: var(--font-weight-semibold);
+      }
+    }
+  }
+  
+  .type-cell {
+    .mat-mdc-chip-set {
+      .mat-mdc-chip {
+        font-size: var(--font-size-xs);
+        height: 24px;
+        border-radius: var(--radius-sm);
+        font-weight: var(--font-weight-medium);
+        border: none;
+        
+        mat-icon {
+          font-size: 14px;
+          width: 14px;
+          height: 14px;
+          margin-right: var(--spacing-xxs);
+        }
+        
+        &.type-chip-permission {
+          background-color: var(--primary-100);
+          color: var(--primary-700);
+        }
+        
+        &.type-chip-role {
+          background-color: #f3e5f5;
+          color: #7b1fa2;
+        }
+        
+        &.type-chip-feature {
+          background-color: var(--secondary-100);
+          color: var(--secondary-700);
+        }
+      }
+    }
+  }
+  
+  .description-cell {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-secondary);
+  }
+  
+  .status-cell {
+    .mat-mdc-chip-set {
+      .mat-mdc-chip {
+        font-size: var(--font-size-xs);
+        height: 24px;
+        border-radius: var(--radius-sm);
+        font-weight: var(--font-weight-medium);
+        border: none;
+        
+        mat-icon {
+          font-size: 14px;
+          width: 14px;
+          height: 14px;
+          margin-right: var(--spacing-xxs);
+        }
+        
+        &.status-active {
+          background-color: #e8f5e8;
+          color: #2e7d32;
+        }
+        
+        &.status-inactive {
+          background-color: #f5f5f5;
+          color: #616161;
+        }
+      }
+    }
+  }
+  
+  .date-cell {
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+  }
+  
+  .actions-cell {
+    text-align: center;
+    
+    .action-button {
+      color: var(--text-muted);
+      transition: var(--transition-normal);
+      
+      &:hover {
+        color: var(--primary-color);
+        background-color: var(--primary-50);
+      }
+    }
+  }
+}
+
+// Action Menu
+::ng-deep .action-menu {
+  .mat-mdc-menu-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    
+    mat-icon {
+      color: var(--text-muted);
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+    
+    &:hover {
+      background-color: var(--primary-50);
+      
+      mat-icon {
+        color: var(--primary-color);
+      }
+    }
+    
+    &.delete-action {
+      &:hover {
+        background-color: rgba(231, 76, 60, 0.1);
+        color: var(--error-color);
+        
+        mat-icon {
+          color: var(--error-color);
+        }
+      }
+    }
+  }
+}
+
+// No Data
+.no-data {
+  text-align: center;
+  padding: var(--spacing-xxxl);
+  color: var(--text-muted);
+  
+  .no-data-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: var(--text-disabled);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  h3 {
+    color: var(--text-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  p {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  button {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-md);
+    
+    &:hover {
+      background-color: var(--primary-600);
+    }
+    
+    mat-icon {
+      margin-right: var(--spacing-xs);
+    }
+  }
+}
+
+// Pagination
+.paginator {
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-light);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .claim-list-container {
+    padding: var(--spacing-md);
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: flex-start !important;
+    
+    .header-actions {
+      align-self: stretch;
+      
+      .create-button {
+        width: 100%;
+      }
+    }
+  }
+  
+  .search-field {
+    max-width: none !important;
+  }
+  
+  .claims-table {
+    .description-cell {
+      display: none;
+    }
+    
+    .date-cell {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .header-card .mat-mdc-card-title {
+    font-size: var(--font-size-xl) !important;
+  }
+  
+  .claims-table {
+    .type-cell,
+    .description-cell {
+      display: none;
+    }
+  }
+}

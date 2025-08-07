@@ -1,0 +1,11 @@
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Core\GenAI.ProjectManagement.Domain\obj\Debug\net9.0\GenAI.ProjectManagement.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Core\GenAI.ProjectManagement.Domain\obj\Debug\net9.0\GenAI.ProjectManagement.Domain.AssemblyInfoInputs.cache
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Core\GenAI.ProjectManagement.Domain\obj\Debug\net9.0\GenAI.ProjectManagement.Domain.AssemblyInfo.cs
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Core\GenAI.ProjectManagement.Domain\obj\Debug\net9.0\GenAI.ProjectManagement.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Core\GenAI.ProjectManagement.Domain\bin\Debug\net9.0\GenAI.ProjectManagement.Domain.deps.json
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Core\GenAI.ProjectManagement.Domain\bin\Debug\net9.0\GenAI.ProjectManagement.Domain.dll
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Core\GenAI.ProjectManagement.Domain\bin\Debug\net9.0\GenAI.ProjectManagement.Domain.pdb
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Core\GenAI.ProjectManagement.Domain\obj\Debug\net9.0\GenAI.ProjectManagement.Domain.dll
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Core\GenAI.ProjectManagement.Domain\obj\Debug\net9.0\refint\GenAI.ProjectManagement.Domain.dll
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Core\GenAI.ProjectManagement.Domain\obj\Debug\net9.0\GenAI.ProjectManagement.Domain.pdb
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Core\GenAI.ProjectManagement.Domain\obj\Debug\net9.0\ref\GenAI.ProjectManagement.Domain.dll

@@ -1,0 +1,67 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Aspire AppHost",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/ProjectManagement.AppHost/bin/Debug/net9.0/ProjectManagement.AppHost.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/ProjectManagement.AppHost",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "DOTNET_ENVIRONMENT": "Development"
+            },
+            "preLaunchTask": "build-apphost",
+            "postDebugTask": "open-aspire-dashboard"
+        },
+        {
+            "name": "Launch API Only",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/Web/GenAI.ProjectManagement.WebAPI/bin/Debug/net9.0/GenAI.ProjectManagement.WebAPI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Web/GenAI.ProjectManagement.WebAPI",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:5052"
+            },
+            "preLaunchTask": "build-api",
+            "launchBrowser": {
+                "enabled": true,
+                "args": "${auto-detect-url}/swagger",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start ${auto-detect-url}/swagger"
+                }
+            }
+        },
+        {
+            "name": "Launch Angular Frontend Only",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/project-management-ui/node_modules/@angular/cli/bin/ng",
+            "args": ["serve", "--port", "4200"],
+            "cwd": "${workspaceFolder}/project-management-ui",
+            "console": "integratedTerminal",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "preLaunchTask": "install-frontend-deps"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch Full Stack (API + Frontend)",
+            "configurations": [
+                "Launch API Only",
+                "Launch Angular Frontend Only"
+            ],
+            "stopAll": true
+        }
+    ]
+}

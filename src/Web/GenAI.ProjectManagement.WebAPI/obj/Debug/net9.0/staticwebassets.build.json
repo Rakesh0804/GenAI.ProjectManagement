@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "A9TQ0leiFjv6EaRUglBm3ZBpjVNyc7LXJ3/B0bP1Nm0=",
+  "Source": "GenAI.ProjectManagement.WebAPI",
+  "BasePath": "_content/GenAI.ProjectManagement.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

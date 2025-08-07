@@ -1,0 +1,219 @@
+<div class="layout-container" *ngIf="isAuthenticated">
+  <!-- Sidebar -->
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav 
+      mode="side" 
+      opened="true" 
+      class="sidebar"
+      [fixedInViewport]="true"
+      [fixedTopGap]="0">
+      
+      <!-- Logo/Brand -->
+      <div class="sidebar-header">
+        <div class="logo">
+          <mat-icon class="logo-icon">dashboard</mat-icon>
+          <span class="app-name">ProjectHub</span>
+        </div>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Main</div>
+          
+          <a mat-button 
+             routerLink="/home" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+          </a>
+
+          <a mat-button 
+             routerLink="/dashboard" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
+          </a>
+
+          <a mat-button 
+             routerLink="/projects" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>work</mat-icon>
+            <span>Projects</span>
+          </a>
+
+          <a mat-button 
+             routerLink="/tasks" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>assignment</mat-icon>
+            <span>Tasks</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">Management</div>
+          
+          <a mat-button 
+             routerLink="/users" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>people</mat-icon>
+            <span>Users</span>
+          </a>
+
+          <a mat-button 
+             routerLink="/claims" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>security</mat-icon>
+            <span>Claims</span>
+          </a>
+
+          <a mat-button 
+             routerLink="/organizations" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>business</mat-icon>
+            <span>Organizations</span>
+          </a>
+
+          <a mat-button 
+             routerLink="/calendar" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>event</mat-icon>
+            <span>Calendar</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">Tools</div>
+          
+          <a mat-button 
+             routerLink="/time-tracker" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>access_time</mat-icon>
+            <span>Time Tracker</span>
+          </a>
+
+          <a mat-button 
+             routerLink="/attendance" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>event_available</mat-icon>
+            <span>Attendance</span>
+          </a>
+
+          <a mat-button 
+             routerLink="/files" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>folder</mat-icon>
+            <span>Files</span>
+          </a>
+
+          <a mat-button 
+             routerLink="/travel" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>flight</mat-icon>
+            <span>Travel</span>
+          </a>
+
+          <a mat-button 
+             routerLink="/compensation" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>account_balance_wallet</mat-icon>
+            <span>Compensation</span>
+          </a>
+
+          <a mat-button 
+             routerLink="/reports" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>assessment</mat-icon>
+            <span>Reports</span>
+          </a>
+
+          <a mat-button 
+             routerLink="/chat" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon>chat</mat-icon>
+            <span>Chat</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <a mat-button 
+             class="nav-item more-btn">
+            <mat-icon>more_horiz</mat-icon>
+            <span>More</span>
+          </a>
+        </div>
+      </nav>
+    </mat-sidenav>
+
+    <!-- Main Content -->
+    <mat-sidenav-content class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <div class="breadcrumb">
+            <span class="current-section">{{ getCurrentSection() }}</span>
+          </div>
+        </div>
+        
+        <div class="header-right">
+          <button mat-icon-button class="header-action">
+            <mat-icon>add</mat-icon>
+          </button>
+          
+          <button mat-icon-button class="header-action">
+            <mat-icon>search</mat-icon>
+          </button>
+          
+          <button mat-icon-button class="header-action">
+            <mat-icon>notifications</mat-icon>
+            <span class="notification-badge" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
+          </button>
+          
+          <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-btn">
+            <div class="user-avatar">
+              <span>{{ getUserInitials() }}</span>
+            </div>
+            <span class="user-name">{{ currentUser?.firstName }}</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="page-content">
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <!-- User Menu -->
+  <mat-menu #userMenu="matMenu" class="user-dropdown">
+    <button mat-menu-item routerLink="/profile">
+      <mat-icon>person</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</div>
+
+<!-- Login Layout -->
+<div class="login-layout" *ngIf="!isAuthenticated">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,596 @@
+.organization-dashboard {
+  padding: var(--spacing-lg);
+  background-color: var(--bg-secondary);
+  min-height: 100vh;
+}
+
+// Header Card - Exact same as Claims
+.header-card {
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-medium);
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    
+    .header-left {
+      .mat-mdc-card-title {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        color: var(--text-primary);
+        font-size: var(--font-size-xxl);
+        font-weight: var(--font-weight-semibold);
+        margin-bottom: var(--spacing-xs);
+        
+        .header-icon {
+          color: var(--primary-color);
+          font-size: 28px;
+          width: 28px;
+          height: 28px;
+        }
+      }
+      
+      .mat-mdc-card-subtitle {
+        color: var(--text-muted);
+        font-size: var(--font-size-base);
+        margin: 0;
+      }
+    }
+    
+    .header-actions {
+      .create-button {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: var(--font-weight-medium);
+        box-shadow: var(--shadow-small);
+        transition: var(--transition-normal);
+        border-radius: var(--radius-md);
+        
+        &:hover {
+          background-color: var(--primary-600);
+          box-shadow: var(--shadow-medium);
+        }
+        
+        mat-icon {
+          margin-right: var(--spacing-xs);
+        }
+      }
+    }
+  }
+}
+
+// Organizations Grid Layout
+.organizations-container {
+  .organizations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+  }
+}
+
+// Organization Card Styling
+.organization-card {
+  cursor: pointer;
+  transition: var(--transition-normal);
+  border: 2px solid transparent;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-large);
+    border-color: var(--border-medium);
+  }
+  
+  &.selected {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-large);
+    
+    .org-avatar {
+      background-color: var(--primary-50);
+      
+      mat-icon {
+        color: var(--primary-color);
+      }
+    }
+  }
+  
+  .mat-mdc-card-header {
+    padding-bottom: var(--spacing-md);
+    
+    .card-menu {
+      position: absolute;
+      top: var(--spacing-sm);
+      right: var(--spacing-sm);
+    }
+  }
+  
+  .org-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-tertiary);
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    mat-icon {
+      font-size: 24px;
+      color: var(--text-muted);
+    }
+  }
+  
+  .org-stats {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-md) 0;
+    
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      
+      mat-icon {
+        color: var(--primary-color);
+        margin-bottom: var(--spacing-xs);
+      }
+      
+      .stat-number {
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-bold);
+        color: var(--text-primary);
+        line-height: 1;
+      }
+      
+      .stat-label {
+        font-size: var(--font-size-sm);
+        color: var(--text-muted);
+      }
+    }
+  }
+  
+  .org-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin: var(--spacing-sm) 0;
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+    
+    mat-icon {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+  }
+}
+
+// Branches Preview in Cards
+.branches-preview {
+  border-top: 1px solid var(--border-light);
+  padding-top: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  
+  .branches-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+    
+    .branches-title {
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-primary);
+      font-size: var(--font-size-sm);
+    }
+  }
+  
+  .branches-list {
+    .branch-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-xs) 0;
+      border-bottom: 1px solid var(--border-light);
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .branch-info {
+        flex: 1;
+        
+        .branch-name {
+          display: block;
+          font-weight: var(--font-weight-medium);
+          color: var(--text-primary);
+          font-size: var(--font-size-sm);
+        }
+        
+        .branch-location {
+          display: block;
+          color: var(--text-muted);
+          font-size: var(--font-size-xs);
+        }
+      }
+      
+      .branch-actions {
+        display: flex;
+        gap: var(--spacing-xs);
+      }
+    }
+    
+    .more-branches {
+      text-align: center;
+      padding-top: var(--spacing-sm);
+      
+      button {
+        font-size: var(--font-size-xs);
+        color: var(--primary-color);
+      }
+    }
+  }
+}
+
+// No Branches State
+.no-branches {
+  text-align: center;
+  padding: var(--spacing-lg) var(--spacing-md);
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-md);
+  
+  .no-branches-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    
+    mat-icon {
+      font-size: 32px;
+      color: var(--text-disabled);
+    }
+    
+    span {
+      color: var(--text-muted);
+      font-size: var(--font-size-sm);
+    }
+}
+
+// Organization Details
+.organization-details {
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+    
+    .stat-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        border-color: #1976d2;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      mat-icon {
+        color: #1976d2;
+        font-size: 24px;
+      }
+      
+      .stat-info {
+        .stat-number {
+          font-size: 18px;
+          font-weight: 600;
+          color: #212121;
+          line-height: 1.2;
+        }
+        
+        .stat-label {
+          font-size: 12px;
+          color: #757575;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+      }
+    }
+  }
+  
+  .contact-card {
+    border: 1px solid #e0e0e0;
+    margin-bottom: 24px;
+    
+    mat-card-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid #e0e0e0;
+      background-color: #f8f9fa;
+      
+      mat-card-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+        color: #212121;
+        
+        mat-icon {
+          color: #1976d2;
+          font-size: 20px;
+        }
+      }
+    }
+    
+    mat-card-content {
+      padding: 24px;
+      
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 24px;
+        
+        .contact-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          
+          mat-icon {
+            color: #1976d2;
+            font-size: 18px;
+            margin-top: 2px;
+          }
+          
+          .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            
+            .contact-label {
+              font-size: 12px;
+              color: #757575;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+              font-weight: 500;
+            }
+            
+            .contact-value {
+              color: #1976d2;
+              text-decoration: none;
+              
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .info-grid {
+    .info-card {
+      border: 1px solid #e0e0e0;
+      
+      mat-card-header {
+        padding: 16px 24px;
+        border-bottom: 1px solid #e0e0e0;
+        background-color: #f8f9fa;
+        
+        mat-card-title {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 18px;
+          font-weight: 600;
+          margin: 0;
+          color: #212121;
+          
+          mat-icon {
+            color: #1976d2;
+            font-size: 20px;
+          }
+        }
+      }
+      
+      mat-card-content {
+        padding: 24px;
+        
+        p {
+          margin: 0;
+          line-height: 1.6;
+          color: #424242;
+        }
+      }
+    }
+  }
+}
+
+// Branches Detail
+.branches-detail {
+  .branches-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    
+    h3 {
+      margin: 0;
+      color: #212121;
+      font-weight: 600;
+    }
+  }
+  
+  .branches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    
+    .branch-card {
+      border: 1px solid #e0e0e0;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        border-color: #1976d2;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      mat-card-header {
+        .branch-avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #f5f5f5;
+          
+          mat-icon {
+            font-size: 20px;
+          }
+        }
+        
+        mat-card-title {
+          font-size: 16px;
+          font-weight: 600;
+        }
+        
+        mat-card-subtitle {
+          font-size: 12px;
+          text-transform: capitalize;
+        }
+        
+        .branch-actions {
+          position: absolute;
+          top: 8px;
+          right: 8px;
+        }
+      }
+      
+      mat-card-content {
+        .branch-details {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          
+          .branch-info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            
+            mat-icon {
+              font-size: 16px;
+              color: #757575;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .no-branches-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 48px;
+    
+    mat-icon {
+      font-size: 64px;
+      color: #bdbdbd;
+      margin-bottom: 24px;
+    }
+    
+    h3 {
+      margin: 0 0 8px 0;
+      color: #495057;
+      font-weight: 500;
+    }
+    
+    p {
+      margin: 0 0 24px 0;
+      color: #6c757d;
+      max-width: 300px;
+    }
+  }
+}
+
+}
+
+// Empty State
+.empty-state {
+  text-align: center;
+  padding: 48px;
+  
+  .empty-content {
+    max-width: 400px;
+    margin: 0 auto;
+    
+    mat-icon {
+      font-size: 64px;
+      color: #bdbdbd;
+      margin-bottom: 24px;
+    }
+    
+    p {
+      margin: 0 0 24px 0;
+      color: #6c757d;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Loading State
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  
+  .loading-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    
+    p {
+      margin: 0;
+      color: #6c757d;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .organization-dashboard {
+    padding: 16px;
+  }
+  
+  .organizations-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .page-header .header-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+}

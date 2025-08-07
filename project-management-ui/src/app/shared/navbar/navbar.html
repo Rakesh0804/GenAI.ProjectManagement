@@ -1,0 +1,44 @@
+<mat-toolbar color="primary" *ngIf="isAuthenticated">
+  <button mat-button routerLink="/dashboard">
+    <mat-icon>dashboard</mat-icon>
+    Dashboard
+  </button>
+  
+  <button mat-button routerLink="/projects">
+    <mat-icon>work</mat-icon>
+    Projects
+  </button>
+  
+  <button mat-button routerLink="/tasks">
+    <mat-icon>assignment</mat-icon>
+    Tasks
+  </button>
+  
+  <button mat-button routerLink="/users" *ngIf="isAdmin">
+    <mat-icon>people</mat-icon>
+    Users
+  </button>
+
+  <button mat-button routerLink="/organizations" *ngIf="isAdmin">
+    <mat-icon>business</mat-icon>
+    Organization
+  </button>
+
+  <span class="spacer"></span>
+  
+  <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="currentUser">
+    <mat-icon>account_circle</mat-icon>
+    {{ currentUser.firstName }} {{ currentUser.lastName }}
+  </button>
+  
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item routerLink="/profile">
+      <mat-icon>person</mat-icon>
+      Profile
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </mat-menu>
+</mat-toolbar>

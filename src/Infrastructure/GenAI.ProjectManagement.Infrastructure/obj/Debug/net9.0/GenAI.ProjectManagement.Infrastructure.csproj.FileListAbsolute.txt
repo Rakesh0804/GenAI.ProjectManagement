@@ -1,0 +1,17 @@
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\obj\Debug\net9.0\GenAI.ProjectManagement.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\obj\Debug\net9.0\GenAI.ProjectManagement.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\obj\Debug\net9.0\GenAI.ProjectManagement.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\obj\Debug\net9.0\GenAI.ProjectManagement.Infrastructure.AssemblyInfo.cs
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\obj\Debug\net9.0\GenAI.ProjectManagement.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\bin\Debug\net9.0\GenAI.ProjectManagement.Infrastructure.deps.json
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\bin\Debug\net9.0\GenAI.ProjectManagement.Infrastructure.dll
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\bin\Debug\net9.0\GenAI.ProjectManagement.Infrastructure.pdb
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\bin\Debug\net9.0\GenAI.ProjectManagement.Application.dll
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\bin\Debug\net9.0\GenAI.ProjectManagement.Domain.dll
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\bin\Debug\net9.0\GenAI.ProjectManagement.Domain.pdb
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\bin\Debug\net9.0\GenAI.ProjectManagement.Application.pdb
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\obj\Debug\net9.0\GenAI.Pr.531D2B58.Up2Date
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\obj\Debug\net9.0\GenAI.ProjectManagement.Infrastructure.dll
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\obj\Debug\net9.0\refint\GenAI.ProjectManagement.Infrastructure.dll
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\obj\Debug\net9.0\GenAI.ProjectManagement.Infrastructure.pdb
+C:\Users\Rakesh Pandey\source\repos\GenAI.ProjectManagement\src\Infrastructure\GenAI.ProjectManagement.Infrastructure\obj\Debug\net9.0\ref\GenAI.ProjectManagement.Infrastructure.dll

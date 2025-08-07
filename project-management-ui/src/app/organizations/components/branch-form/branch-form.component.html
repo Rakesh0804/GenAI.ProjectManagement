@@ -1,0 +1,177 @@
+<div class="branch-form-dialog">
+  <h2 mat-dialog-title>
+    <mat-icon>{{ isEdit ? 'edit' : 'add_location_alt' }}</mat-icon>
+    {{ isEdit ? 'Edit Branch' : 'Create Branch' }}
+  </h2>
+
+  <div mat-dialog-content class="dialog-content">
+  <form [formGroup]="branchForm" class="branch-form">
+    <div class="form-grid">
+      
+      <!-- Basic Information Section -->
+      <div class="form-section">
+        <h3 class="section-title">Basic Information</h3>
+        
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Branch Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter branch name">
+            <mat-icon matSuffix>business</mat-icon>
+            <mat-error *ngIf="isFieldInvalid('name')">
+              {{ getFieldError('name') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" rows="3" 
+                      placeholder="Enter branch description"></textarea>
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-error *ngIf="isFieldInvalid('description')">
+              {{ getFieldError('description') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Contact Information Section -->
+      <div class="form-section">
+        <h3 class="section-title">Contact Information</h3>
+        
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone" placeholder="Enter phone number">
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error *ngIf="isFieldInvalid('phone')">
+              {{ getFieldError('phone') }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="Enter email address">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="isFieldInvalid('email')">
+              {{ getFieldError('email') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Address Information Section -->
+      <div class="form-section">
+        <h3 class="section-title">Address Information</h3>
+        
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Address</mat-label>
+            <textarea matInput formControlName="address" rows="2" 
+                      placeholder="Enter street address"></textarea>
+            <mat-icon matSuffix>location_on</mat-icon>
+            <mat-error *ngIf="isFieldInvalid('address')">
+              {{ getFieldError('address') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city" placeholder="Enter city">
+            <mat-icon matSuffix>location_city</mat-icon>
+            <mat-error *ngIf="isFieldInvalid('city')">
+              {{ getFieldError('city') }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>State/Province</mat-label>
+            <input matInput formControlName="state" placeholder="Enter state or province">
+            <mat-icon matSuffix>map</mat-icon>
+            <mat-error *ngIf="isFieldInvalid('state')">
+              {{ getFieldError('state') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Country</mat-label>
+            <input matInput formControlName="country" placeholder="Enter country">
+            <mat-icon matSuffix>public</mat-icon>
+            <mat-error *ngIf="isFieldInvalid('country')">
+              {{ getFieldError('country') }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Postal Code</mat-label>
+            <input matInput formControlName="postalCode" placeholder="Enter postal code">
+            <mat-icon matSuffix>markunread_mailbox</mat-icon>
+            <mat-error *ngIf="isFieldInvalid('postalCode')">
+              {{ getFieldError('postalCode') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Management Information Section -->
+      <div class="form-section">
+        <h3 class="section-title">Management Information</h3>
+        
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Branch Manager</mat-label>
+            <input matInput formControlName="managerId"
+                   [matAutocomplete]="managerAutocomplete"
+                   placeholder="Search and select a manager">
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-autocomplete #managerAutocomplete="matAutocomplete" 
+                              [displayWith]="displayUserFn.bind(this)"
+                              (optionSelected)="onUserSelected($event.option.value)">
+              <mat-option *ngFor="let user of filteredUsers | async" [value]="user.id">
+                <div class="user-option">
+                  <span class="user-name">{{ user.firstName }} {{ user.lastName }}</span>
+                  <small class="user-email">{{ user.email }}</small>
+                </div>
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="isFieldInvalid('managerId')">
+              {{ getFieldError('managerId') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-slide-toggle formControlName="isActive" class="status-toggle">
+            <span class="toggle-label">
+              <mat-icon>{{ branchForm.get('isActive')?.value ? 'toggle_on' : 'toggle_off' }}</mat-icon>
+              {{ branchForm.get('isActive')?.value ? 'Active Branch' : 'Inactive Branch' }}
+            </span>
+          </mat-slide-toggle>
+        </div>
+      </div>
+
+    </div>
+  </form>
+  </div>
+
+  <div mat-dialog-actions class="dialog-actions">
+  <button mat-button type="button" (click)="onReset()" [disabled]="isSubmitting">
+    <mat-icon>refresh</mat-icon>
+    Reset
+  </button>
+  <button mat-button type="button" (click)="onCancel()" [disabled]="isSubmitting">
+    Cancel
+  </button>
+  <button mat-raised-button color="primary" type="submit" 
+          (click)="onSubmit()" [disabled]="branchForm.invalid || isSubmitting">
+    <mat-icon *ngIf="isSubmitting">hourglass_empty</mat-icon>
+    <mat-icon *ngIf="!isSubmitting">{{ isEdit ? 'save' : 'add' }}</mat-icon>
+    {{ isSubmitting ? 'Saving...' : (isEdit ? 'Update' : 'Create') }}
+  </button>
+  </div>
+</div>
